@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const inputText = document.getElementById('inputText');
-    const resultText = document.getElementById('resultText');
+    const transText = document.getElementById('transText');
     const selectedLang = document.getElementById('selectedLang');
+    const saveBtn = document.getElementById('saveBtn');
+    const dbResult = document.getElementById('dbResult');
+    const showBtn = document.getElementById('showBtn');
 
     // выковыриваем из куки значение дефолтового языка
     const cookieLangValue = document.cookie.replace(/(?:(?:^|.*;\s*)lang\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -28,6 +31,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const res = await fetch(url);
         const json = await res.json();
-        resultText.innerText = json.text[0];
+        transText.innerText = json.text[0];
     });
+
+    //пост запрос на сервак который умеет json принимать
+    saveBtn.addEventListener("click", async () => {
+        const res = await fetch("/api/save", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text: inputText.value,
+                translate: transText.innerText
+            })
+        });
+
+        if (res.status === 201) {
+            dbResult.innerText = "text and transtale saved"
+        } else {
+            dbResult.innerText = "error"
+        }
+    });
+
+    //получаем все переводы
+    showBtn.addEventListener("click", async () => {
+        const res = await fetch("/api/show");
+        const json = await res.json();
+
+        console.log(json);
+        //и.т.д...
+
+    });
+
 });

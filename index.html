@@ -1,17 +1,23 @@
 <html>
     <head>
-        <title>Transtalor</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <title>Express</title>
     </head>
     <body>
-    <p><select size="1" id="selectedLang">
-        <option value="en-ru" selected>eng -> rus</option>
-        <option value="ru-en">rus -> eng</option>
-    </select></p>
+        <h1>Transtalor</h1>
 
-    <p><textarea rows="10" cols="45" name="text" placeholder="type your text" id="inputText"></textarea></p>
-    <p id="resultText"></p>
+        <p><select size="1" id="selectedLang">
+            <option value="en-ru" selected>eng -> rus</option>
+            <option value="ru-en">rus -> eng</option>
+        </select></p>
 
-    <script src="index.js"></script>
+        <p><textarea rows="10" cols="45" name="text" placeholder="type your text" id="inputText"></textarea></p>
+        <p id="transText"></p>
+
+        <button id="saveBtn">Save to DB</button>
+
+        <p id="dbResult"></p>
+        <button id="showBtn">Show Db records</button>
+
+        <script src="index.js"></script>
     </body>
 </html>
